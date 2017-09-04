@@ -1,6 +1,6 @@
 # Net Quota
 
-Check remain bandwidth from http://pi.ku.ac.th with python
+Check remain KU bandwidth with python
 
 ## How to run it
 ```
