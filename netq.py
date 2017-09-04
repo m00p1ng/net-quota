@@ -1,19 +1,21 @@
+#!/usr/bin/env python
 import sys
 import re
 import time
 import urllib.request
 
-url = 'http://pi.ku.ac.th'
+URL = 'http://pi.ku.ac.th'
 DELAY = 10
 
 
 def print_quota(quota):
     remain = float(quota.split()[0])
+    unit = quota.split()[1]
     reset = '\033[0m'
 
-    if remain > 5:
+    if remain > 5 and unit is 'GB':
         color = '\033[1;32m'
-    elif remain > 3:
+    elif remain > 1 and unit is 'GB':
         color = '\033[1;33m'
     else:
         color = '\033[1;31m'
@@ -22,9 +24,9 @@ def print_quota(quota):
 
 
 def main():
-    sys.stdout.write("From {}\n".format(url))
+    sys.stdout.write("From {}\n".format(URL))
     while 1:
-        res = urllib.request.urlopen(url)
+        res = urllib.request.urlopen(URL)
 
         result = re.search(
             b"<span style='font-size: 20px'>(.*)</span>", res.read())
@@ -41,4 +43,7 @@ def main():
 
 
 if __name__ == '__main__':
-    main()
+    try:
+        main()
+    except KeyboardInterrupt:
+        sys.stdout.write("\nexit")
