@@ -63,3 +63,6 @@ if __name__ == '__main__':
         main()
     except KeyboardInterrupt:
         sys.stdout.write("\nexit\n")
+    except urllib.error.URLError:
+        sys.stdout.write("\nNetwork Error\n")
+        sys.exit(1)
